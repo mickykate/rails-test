@@ -28,7 +28,11 @@
    <td><%= post.title %></td>
    <td><%= post.start_date %></td>
    <td><%= post.end_date %></td>
-   <td><%= post.is_all_day %></td>
+   <td><% if post.is_all_day %> 
+   ⚪︎ 
+   <% else %>
+    <% end %>
+    </td>
    <td><%= post.updated_at.to_s(:datetime_jp) %></td>
    <td><%= link_to "詳細", post_path(post) %></td>
    <td><%= link_to "編集", edit_post_path(post) %></td>

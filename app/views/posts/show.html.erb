@@ -1,6 +1,7 @@
 <%= render "shared/patial" %>
 
-<%= link_to "一覧に戻る", posts_path %>
+<p><%= link_to "予定一覧に戻る", posts_path %></p>
+<p><%= link_to "予定を編集する" , edit_post_path %></p>
 
 <%= form_with model: @post do |f| %>
 
@@ -12,7 +13,7 @@
      <tr>
       <th>開始日</th>
       <td><% if @post.start_date %>
-      <%= l @post.start_date %>
+      <%= @post.start_date %>
     <% else %>
     <% end %>
     </td>
@@ -20,7 +21,7 @@
 
      <tr>
       <th>終了日</th>
-      <td><%= l @post.end_date.to_datetime if @post.end_date %></td>
+      <td><%= @post.end_date.to_datetime if @post.end_date %></td>
      </tr>
 
      <tr>
