@@ -1,0 +1,17 @@
+
+ja:
+  activerecord:
+    errors:
+      messages:
+        too_long: "は %{count} 文字以内で入力してください。"
+    models:
+      post: 予定 
+    attributes:
+      post:
+        title: タイトル名
+        too_long: "タイトル名は %{count} 文字以内で入力してください。"
+        start_date: 開始日
+        end_date: 終了日
+        memo: メモ
+        too_long: "メモは %{count} 文字以内で入力してください。"
+      
