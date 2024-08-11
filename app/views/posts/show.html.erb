@@ -1,0 +1,42 @@
+<%= render "shared/patial" %>
+
+<p><%= link_to "予定一覧に戻る", posts_path %></p>
+<p><%= link_to "予定を編集する" , edit_post_path %></p>
+
+<%= form_with model: @post do |f| %>
+
+    <table>
+     <tr>
+      <th>タイトル</th>
+      <td><%= @post.title %></td>
+     </tr>
+     <tr>
+      <th>開始日</th>
+      <td><% if @post.start_date %>
+      <%= @post.start_date %>
+    <% else %>
+    <% end %>
+    </td>
+     </tr>
+
+     <tr>
+      <th>終了日</th>
+      <td><%= @post.end_date.to_datetime if @post.end_date %></td>
+     </tr>
+
+     <tr>
+      <th>終日</th>
+       <td><% if @post.is_all_day %>
+      ⚪︎
+      <% else %>
+       <% end %>
+       </td>
+     </tr>
+
+     <tr>
+      <th>メモ</th>
+      <td><%= @post.memo %></td>
+     </tr>
+    </table>
+
+<% end %>
