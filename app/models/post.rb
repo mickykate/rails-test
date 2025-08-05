@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+    belongs_to :user
     validates :title, presence: true, length: { maximum: 20, message: "は %{count} 文字以内で入力してください。"}
     validates :start_date, presence: true
     validates :end_date, presence: true

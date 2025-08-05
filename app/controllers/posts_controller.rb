@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   def index #	ユーザーを一覧表示する画面 http:get
     @posts = Post.all
     @schedule_total = Post.all.count
