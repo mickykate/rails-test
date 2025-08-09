@@ -22,19 +22,20 @@ class PostsController < ApplicationController
   end
 
   def show #ユーザー情報を確認する画面 http:get
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
+    #これは、他のユーザーも投稿の投稿も見れてしまうため、削除した。
   end
 
   def edit #ユーザー情報を編集する画面 http:get
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
   end
 
   def update #ユーザー情報を更新する処理 http:patch
     @post = current_user.posts.find(params[:id])
-     if @post.update(params.require(:post).permit(:title, :start_date, :end_date, :is_all_day, :memo))
+      if @post.update(params.require(:post).permit(:title, :start_date, :end_date, :is_all_day, :memo))
       flash[:notice] = "ユーザーIDが「#{@post.id}」の情報を更新しました"
       redirect_to post_path(@post)
-     else
+      else
       flash[:alert] = "スケジュールの更新に失敗しました。#{@post.errors.full_messages.to_sentence}"
       render "edit"
     end
@@ -45,5 +46,10 @@ class PostsController < ApplicationController
     @post.destroy
       flash[:notice] = "スケジュールを削除しました。"
       redirect_to posts_path #リダイレクト先を修正
+  end
+
+  private
+  def set_post
+    @post = current_user.posts.find(params[:id])
   end
 end
