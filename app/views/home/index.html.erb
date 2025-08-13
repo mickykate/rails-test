@@ -1,0 +1,17 @@
+<div class="text-center">
+    <div class="jumbotron bg-light p-5 rounded">
+    <h1 class="display-4">スケジュール管理アプリ</h1>
+    <p class="lead">あなたの予定を効率的に管理しましょう</p>
+    <hr class="my-4">
+    
+    <% unless user_signed_in? %>
+        <p>まずはアカウントを作成して、スケジュール管理を始めてください</p>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary btn-lg me-3" %>
+        <%= link_to "ログイン", new_user_registration_path, class: "btn btn-outline-primary btn-lg" %>
+    <% else %>
+        <p>ようこそ、<strong><%= current_user.email %></strong> さん！</p>
+        <%= link_to "投稿一覧を見る", posts_path, class: "btn btn-primary btn-lg me-3" %>
+        <%= link_to "新規投稿", new_post_path, class: "btn btn-success btn-lg" %>
+    <% end %>
+    </div>
+</div>
