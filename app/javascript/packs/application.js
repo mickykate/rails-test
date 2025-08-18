@@ -13,3 +13,26 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import "bootstrap"
+
+// Sidebar toggle
+function setupSidebarToggle() {
+  const toggle = document.querySelector('.sidebar-toggle')
+  const sidebar = document.querySelector('.sidebar')
+  if (!toggle || !sidebar) return
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('show')
+  })
+
+  document.addEventListener('click', (event) => {
+    if (window.innerWidth > 768) return
+    if (!sidebar.classList.contains('show')) return
+
+    if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+      sidebar.classList.remove('show')
+    }
+  })
+}
+
+// Turbolinks 対応
+document.addEventListener('turbolinks:load', setupSidebarToggle)
