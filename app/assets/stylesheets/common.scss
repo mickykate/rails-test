@@ -52,6 +52,13 @@ table td {
   font-size: 1.5rem;
   margin-bottom: 30px;
   padding: 0 20px;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .sidebar .navbar-brand {
+    margin-top: 20px !important;
+  }
 }
 
 .sidebar .nav-link {
@@ -90,6 +97,7 @@ table td {
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.3s;
+    padding-top: 60px;
   }
 
   .sidebar.show {
@@ -108,7 +116,10 @@ table td {
 .sidebar-toggle {
   display: none;
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: 15px;
+  left: 15px;
   z-index: 1001;
+  font-size: 0.9rem;
+  padding: 8px 12px;
 }
+
