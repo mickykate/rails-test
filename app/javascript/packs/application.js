@@ -14,25 +14,49 @@ ActiveStorage.start()
 
 import "bootstrap"
 
-// Sidebar toggle
-function setupSidebarToggle() {
-  const toggle = document.querySelector('.sidebar-toggle')
-  const sidebar = document.querySelector('.sidebar')
-  if (!toggle || !sidebar) return
+// Sidebar toggle (event delegation)
+function initSidebarHandlers() {
+  const root = document
 
-  toggle.addEventListener('click', () => {
+  // Toggle open/close on button click
+  root.addEventListener('click', (event) => {
+    const toggle = event.target.closest('.sidebar-toggle')
+    if (!toggle) return
+
+    const sidebar = document.querySelector('.sidebar')
+    if (!sidebar) return
+
+    event.preventDefault()
     sidebar.classList.toggle('show')
   })
 
-  document.addEventListener('click', (event) => {
+  // Close when clicking outside on mobile
+  root.addEventListener('click', (event) => {
+    const sidebar = document.querySelector('.sidebar')
+    if (!sidebar) return
+
+    // Only on mobile width
     if (window.innerWidth > 768) return
+
+    // If not open, nothing to do
     if (!sidebar.classList.contains('show')) return
 
-    if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-      sidebar.classList.remove('show')
-    }
+    const toggle = document.querySelector('.sidebar-toggle')
+
+    // Ignore clicks inside sidebar or on the toggle
+    if (sidebar.contains(event.target)) return
+    if (toggle && toggle.contains(event.target)) return
+
+    sidebar.classList.remove('show')
   })
 }
 
-// Turbolinks 対応
-document.addEventListener('turbolinks:load', setupSidebarToggle)
+// Ensure handlers are bound for both Turbolinks and non-Turbolinks loads
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSidebarHandlers)
+} else {
+  initSidebarHandlers()
+}
+
+document.addEventListener('turbolinks:load', initSidebarHandlers)
+
